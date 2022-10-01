@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int>p;
+    int ways(int i,string s){
+        if(i>=s.size())return 1;
+        else if(s[i]=='0')return 0;
+        else if(i==s.size()-1) return 1;
+        else if (p[i]!=-1) return p[i];
+        else if(s[i]=='1'||(s[i]=='2'&& (s[i+1]>='0' && s[i+1]<='6')))
+            return p[i]=ways(i+1,s)+ways(i+2,s);
+        else return p[i]=ways(i+1,s);
+    }
+    int numDecodings(string s) {
+        p.resize(s.size());
+        p.assign(s.size(),-1);
+        // if(s[0]=='0') return 0;
+        return ways(0,s);
+    }
+};
+// 2227
+//     2 2 2 7
+//     2 22 7
+//     22 2 7
+    
